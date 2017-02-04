@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://yuqiangit.github.io/"/>
-  <updated>2017-02-04T06:34:29.000Z</updated>
+  <updated>2017-02-04T10:27:39.000Z</updated>
   <id>https://yuqiangit.github.io/</id>
   
   <author>
@@ -14,6 +14,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>nginx500错误</title>
+    <link href="https://yuqiangit.github.io/2017/02/04/nginx500%E9%94%99%E8%AF%AF/"/>
+    <id>https://yuqiangit.github.io/2017/02/04/nginx500错误/</id>
+    <published>2017-02-04T10:20:44.000Z</published>
+    <updated>2017-02-04T10:27:39.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>#nginx 500 原因汇总</p>
+<p>[toc]</p>
+<p>##检查php-fpm 进程</p>
+<blockquote>
+<p>原因：脚本执行时间超时，导致php-fpm进程被占用<br>方案：<br>临时：添加php-fpm进程数<br>步骤：<br>1，ps -ef | grep php-fpm 查看当前php-fpm的配置文件<br>2，pm = static &amp;&amp; pm.max_children = 128</p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;#nginx 500 原因汇总&lt;/p&gt;
+&lt;p&gt;[toc]&lt;/p&gt;
+&lt;p&gt;##检查php-fpm 进程&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;原因：脚本执行时间超时，导致php-fpm进程被占用&lt;br&gt;方案：&lt;br&gt;临时：添加php-fpm进程数&lt;br&gt;步骤：&lt;br&gt;1，p
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>ELK-system</title>
