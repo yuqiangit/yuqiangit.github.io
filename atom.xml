@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://yuqiangit.github.io/"/>
-  <updated>2017-02-04T10:27:39.000Z</updated>
+  <updated>2017-02-04T10:34:31.000Z</updated>
   <id>https://yuqiangit.github.io/</id>
   
   <author>
@@ -20,9 +20,9 @@
     <link href="https://yuqiangit.github.io/2017/02/04/nginx500%E9%94%99%E8%AF%AF/"/>
     <id>https://yuqiangit.github.io/2017/02/04/nginx500错误/</id>
     <published>2017-02-04T10:20:44.000Z</published>
-    <updated>2017-02-04T10:27:39.000Z</updated>
+    <updated>2017-02-04T10:34:31.000Z</updated>
     
-    <content type="html"><![CDATA[<p>#nginx 500 原因汇总</p>
+    <content type="html"><![CDATA[<p>#nginx 500 解决方案汇总</p>
 <p>[toc]</p>
 <p>##检查php-fpm 进程</p>
 <blockquote>
@@ -32,11 +32,11 @@
     
     <summary type="html">
     
-      &lt;p&gt;#nginx 500 原因汇总&lt;/p&gt;
+      &lt;p&gt;#nginx 500 解决方案汇总&lt;/p&gt;
 &lt;p&gt;[toc]&lt;/p&gt;
 &lt;p&gt;##检查php-fpm 进程&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;原因：脚本执行时间超时，导致php-fpm进程被占用&lt;br&gt;方案：&lt;br&gt;临时：添加php-fpm进程数&lt;br&gt;步骤：&lt;br&gt;1，p
+&lt;p&gt;原因：脚本执行时间超时，导致php-fpm进程被占用&lt;br&gt;方案：&lt;br&gt;临时：添加php-fpm进程数&lt;br&gt;步骤：&lt;br&gt;1
     
     </summary>
     
