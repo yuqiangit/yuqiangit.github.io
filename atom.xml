@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://yuqiangit.github.io/"/>
-  <updated>2017-02-04T03:48:33.000Z</updated>
+  <updated>2017-02-04T04:35:05.000Z</updated>
   <id>https://yuqiangit.github.io/</id>
   
   <author>
@@ -14,6 +14,20 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>info</title>
+    <link href="https://yuqiangit.github.io/2017/02/04/info/"/>
+    <id>https://yuqiangit.github.io/2017/02/04/info/</id>
+    <published>2017-02-04T04:35:04.000Z</published>
+    <updated>2017-02-04T04:35:05.000Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>测试环境</title>
