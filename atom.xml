@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://yuqiangit.github.io/"/>
-  <updated>2017-02-04T10:34:31.000Z</updated>
+  <updated>2017-02-06T02:18:55.000Z</updated>
   <id>https://yuqiangit.github.io/</id>
   
   <author>
@@ -16,11 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>nginx500错误</title>
+    <title>nginx500错误（持续更新...）</title>
     <link href="https://yuqiangit.github.io/2017/02/04/nginx500%E9%94%99%E8%AF%AF/"/>
     <id>https://yuqiangit.github.io/2017/02/04/nginx500错误/</id>
     <published>2017-02-04T10:20:44.000Z</published>
-    <updated>2017-02-04T10:34:31.000Z</updated>
+    <updated>2017-02-06T02:18:55.000Z</updated>
     
     <content type="html"><![CDATA[<p>#nginx 500 解决方案汇总</p>
 <p>[toc]</p>
