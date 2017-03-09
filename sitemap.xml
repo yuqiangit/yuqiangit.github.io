@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://yuqiangit.github.io/2017/03/09/linux/</loc>
+    
+    <lastmod>2017-03-09T08:18:41.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://yuqiangit.github.io/2017/03/09/ELK-system/</loc>
     
     <lastmod>2017-03-09T08:03:25.000Z</lastmod>
@@ -19,27 +26,6 @@
     <loc>https://yuqiangit.github.io/2017/02/04/system/</loc>
     
     <lastmod>2017-02-04T06:33:52.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://yuqiangit.github.io/2017/02/04/%E6%B5%8B%E8%AF%95%E7%8E%AF%E5%A2%83/</loc>
-    
-    <lastmod>2017-02-04T06:18:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://yuqiangit.github.io/2017/02/04/info/</loc>
-    
-    <lastmod>2017-02-04T04:35:05.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://yuqiangit.github.io/2017/02/03/hello-world/</loc>
-    
-    <lastmod>2017-02-03T09:53:58.000Z</lastmod>
     
   </url>
   
