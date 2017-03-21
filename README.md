@@ -1,2 +1,0 @@
-# yuqiangit.github.io
-blog
