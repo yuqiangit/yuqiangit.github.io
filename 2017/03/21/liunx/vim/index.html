@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>mac vim 设置 | 五年</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="#mac vim 设置
+vi ~/.vimrc
+1234567891011121314set ai                  &amp;quot; auto indentingset history=100         &amp;quot; keep 100 lines of historyset ruler               &amp;quot; show the cursor positions">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mac vim 设置">
+<meta property="og:url" content="https://yuqiangit.github.io/2017/03/21/liunx/vim/index.html">
+<meta property="og:site_name" content="五年">
+<meta property="og:description" content="#mac vim 设置
+vi ~/.vimrc
+1234567891011121314set ai                  &amp;quot; auto indentingset history=100         &amp;quot; keep 100 lines of historyset ruler               &amp;quot; show the cursor positions">
+<meta property="og:updated_time" content="2017-03-21T08:15:47.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mac vim 设置">
+<meta name="twitter:description" content="#mac vim 设置
+vi ~/.vimrc
+1234567891011121314set ai                  &amp;quot; auto indentingset history=100         &amp;quot; keep 100 lines of historyset ruler               &amp;quot; show the cursor positions">
+  
+    <link rel="alternate" href="/atom.xml" title="五年" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">五年</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://yuqiangit.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-liunx/vim" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/21/liunx/vim/" class="article-date">
+  <time datetime="2017-03-21T10:20:44.000Z" itemprop="datePublished">2017-03-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      mac vim 设置
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#mac vim 设置</p>
+<p><code>vi ~/.vimrc</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">set ai                  &quot; auto indenting</div><div class="line">set history=100         &quot; keep 100 lines of history</div><div class="line">set ruler               &quot; show the cursor position</div><div class="line">syntax on               &quot; syntax highlighting</div><div class="line">set hlsearch            &quot; highlight the last searched term</div><div class="line">filetype plugin on      &quot; use the file type plugins</div><div class="line"></div><div class="line">&quot; When editing a file, always jump to the last cursor position</div><div class="line">autocmd BufReadPost *</div><div class="line">\ if ! exists(&quot;g:leave_my_cursor_position_alone&quot;) |</div><div class="line">\ if line(&quot;&apos;\&quot;&quot;) &gt; 0 &amp;&amp; line (&quot;&apos;\&quot;&quot;) &lt;= line(&quot;$&quot;) |</div><div class="line">\ exe &quot;normal g&apos;\&quot;&quot; |</div><div class="line">\ endif |</div><div class="line">\ endif</div></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://yuqiangit.github.io/2017/03/21/liunx/vim/" data-id="cj0j9o2xa0000qmsppnggat3t" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/03/21/liunx/vagrant/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">vagrant 虚拟机工具</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/03/21/liunx/vim/">mac vim 设置</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/21/liunx/vagrant/">vagrant 虚拟机工具</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/04/liunx/linux/">linux</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/04/elk/ELK-配置文件/">ELK 配置文件</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/04/nginx/auth_basic/">auth_basic</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 walter<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
