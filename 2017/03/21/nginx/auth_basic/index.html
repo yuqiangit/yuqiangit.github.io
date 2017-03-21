@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>五年</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="#nginx auth_basic 配置
+nginx .conf 文件1234567891011121314151617upstream kibana5 &amp;#123;    server localhost:5601 fail_timeout=5;    keepalive 64;&amp;#125;server &amp;#123;    listen               5602;    server">
+<meta property="og:type" content="article">
+<meta property="og:title" content="五年">
+<meta property="og:url" content="https://yuqiangit.github.io/2017/03/21/nginx/auth_basic/index.html">
+<meta property="og:site_name" content="五年">
+<meta property="og:description" content="#nginx auth_basic 配置
+nginx .conf 文件1234567891011121314151617upstream kibana5 &amp;#123;    server localhost:5601 fail_timeout=5;    keepalive 64;&amp;#125;server &amp;#123;    listen               5602;    server">
+<meta property="og:updated_time" content="2017-03-21T07:37:31.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="五年">
+<meta name="twitter:description" content="#nginx auth_basic 配置
+nginx .conf 文件1234567891011121314151617upstream kibana5 &amp;#123;    server localhost:5601 fail_timeout=5;    keepalive 64;&amp;#125;server &amp;#123;    listen               5602;    server">
+  
+    <link rel="alternate" href="/atom.xml" title="五年" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">五年</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://yuqiangit.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-nginx/auth_basic" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/21/nginx/auth_basic/" class="article-date">
+  <time datetime="2017-03-21T07:37:31.000Z" itemprop="datePublished">2017-03-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#nginx auth_basic 配置</p>
+<p>nginx .conf 文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">upstream kibana5 &#123;</div><div class="line">    server localhost:5601 fail_timeout=5;</div><div class="line">    keepalive 64;</div><div class="line">&#125;</div><div class="line">server &#123;</div><div class="line">    listen               5602;</div><div class="line">    server_name          kibana_server.com;</div><div class="line">    access_log           /data/log/nginx/kibana.srv-log-dev.log;</div><div class="line">    error_log            /data/log/nginx/kibana.srv-log-dev.error.log;</div><div class="line"></div><div class="line">    location / &#123;</div><div class="line">         auth_basic &quot;secret&quot;;</div><div class="line">         auth_basic_user_file /data/local/nginx/passwd.db;</div><div class="line">         proxy_pass           http://localhost:5601;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><em>配置的选项</em><br><code>auth_basic &quot;secret&quot;;
+ auth_basic_user_file /data/local/nginx/passwd.db;</code></p>
+<p><em>auth文件</em><br>/data/local/nginx/passwd.db</p>
+<p>我使用的是nginx服务器：为了方便直接使用在线工具生成的，格式如下：<br>user:passwd</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://yuqiangit.github.io/2017/03/21/nginx/auth_basic/" data-id="cj0j94g8j0002mhsplw8g47c0" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/03/21/elk/ELK-配置文件/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Récent</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/02/04/liunx/linux/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">linux</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/03/21/elk/ELK-搭建文档/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/21/elk/ELK-配置文件/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/21/nginx/auth_basic/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/04/liunx/linux/">linux</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/04/nginx/nginx500错误/">nginx500错误（持续更新...）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 walter<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
