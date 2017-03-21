@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://yuqiangit.github.io/"/>
-  <updated>2017-03-09T08:34:05.000Z</updated>
+  <updated>2017-03-21T08:15:47.000Z</updated>
   <id>https://yuqiangit.github.io/</id>
   
   <author>
@@ -14,6 +14,55 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>mac vim 设置</title>
+    <link href="https://yuqiangit.github.io/2017/03/21/liunx/vim/"/>
+    <id>https://yuqiangit.github.io/2017/03/21/liunx/vim/</id>
+    <published>2017-03-21T10:20:44.000Z</published>
+    <updated>2017-03-21T08:15:47.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>#mac vim 设置</p>
+<p><code>vi ~/.vimrc</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">set ai                  &quot; auto indenting</div><div class="line">set history=100         &quot; keep 100 lines of history</div><div class="line">set ruler               &quot; show the cursor position</div><div class="line">syntax on               &quot; syntax highlighting</div><div class="line">set hlsearch            &quot; highlight the last searched term</div><div class="line">filetype plugin on      &quot; use the file type plugins</div><div class="line"></div><div class="line">&quot; When editing a file, always jump to the last cursor position</div><div class="line">autocmd BufReadPost *</div><div class="line">\ if ! exists(&quot;g:leave_my_cursor_position_alone&quot;) |</div><div class="line">\ if line(&quot;&apos;\&quot;&quot;) &gt; 0 &amp;&amp; line (&quot;&apos;\&quot;&quot;) &lt;= line(&quot;$&quot;) |</div><div class="line">\ exe &quot;normal g&apos;\&quot;&quot; |</div><div class="line">\ endif |</div><div class="line">\ endif</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;#mac vim 设置&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;vi ~/.vimrc&lt;/code&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/d
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>vagrant 虚拟机工具</title>
+    <link href="https://yuqiangit.github.io/2017/03/21/liunx/vagrant/"/>
+    <id>https://yuqiangit.github.io/2017/03/21/liunx/vagrant/</id>
+    <published>2017-03-21T10:20:44.000Z</published>
+    <updated>2017-03-21T08:16:21.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="vagrant"><a href="#vagrant" class="headerlink" title=" #vagrant"></a> #<a href="https://www.vagrantup.com/" target="_blank" rel="external">vagrant</a></h2><p> [TOC]</p>
+<p> ##install</p>
+<p> 创建文件夹</p>
+<p> <code>vagrant init ubuntu/trusty64</code></p>
+<p> <code>vagrant up --provider virtualbox</code></p>
+<p> ##cmd<br> |cmd|描述|<br> |:|<br> |<code>vagrant status</code>|状态<br> |<code>vagrant halt</code>|强制关闭，立刻释放所有的ram<br> |<code>vagrant suspend</code>|挂起|<br> |<code>vagrant up</code>|启动|<br> |<code>vagrant destroy</code>|摧毁机器|<br> |<code>vagrant reload</code>|重启机器|</p>
+<p> ##访问控制<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"># Create a forwarded port mapping which allows access to a specific port</div><div class="line"># within the machine from a port on the host machine. In the example below,</div><div class="line"># accessing &quot;localhost:8080&quot; will access port 80 on the guest machine.</div><div class="line"># config.vm.network &quot;forwarded_port&quot;, guest: 80, host: 8080</div><div class="line">Add the following directly below those comments: config.vm.network :forwarded_port, guest: 80, host: 8080</div><div class="line"></div><div class="line">Save the file and start your Vagrant virtual machine using the vagrant up command. If your virtual machine is currently running, you can reload it using the vagrant reload command.</div><div class="line"></div><div class="line"></div><div class="line">This configuration change will setup port forwarding from port 8080 on the host machine (your computer) to the guest machine (your Vagrant virtual machine) when your virtual machine is running. This will allow you to access your web server using the URL http://localhost:8080.</div></pre></td></tr></table></figure></p>
+<p> ##smoe lesson<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">Vagrant Commands</div><div class="line">We’re now ready to get started working within our Linux virtual machine. If your download hasn’t completed from the initial setup, go ahead and take a break and come back when that has completed. You won’t be able to make further progress until the virtual machine is up and running as much of the course will take place within this environment.</div><div class="line"></div><div class="line">Before we access our machine, let’s quickly review a few commands that vagrant provides to make managing your virtual machines much simpler. Remember, your vagrant machine lives within this specific folder on your computer so make sure you’re within that same folder your created earlier; otherwise these commands won’t work as expected.</div><div class="line"></div><div class="line">Type vagrant status</div><div class="line">This command will show you the current status of the virtual machine. It should currently read “default running (virtualbox)” along with some other information.</div><div class="line">Type vagrant suspend</div><div class="line">This command suspends your virtual machine. All of your work is saved and the machine is put into a “sleep mode” of sorts. The machines state is saved and it’s very quick to stop and start your work. You should use this command if you plan to just take a short break from your work but don’t want to leave the virtual machine running.</div><div class="line">Type vagrant up</div><div class="line">This gets your virtual machine up and running again. Notice we didn’t have to redownload the virtual machine image, since it’s already been downloaded.</div><div class="line">Type vagrant ssh</div><div class="line">This command will actually connect to and log you into your virtual machine. Once done you will see a few lines of text showing various performance statistics of the virtual machine along with a new command line prompt that reads vagrant@vagrant-ubuntu-trusty-64:~$</div><div class="line">Here are a few other important commands that we’ll discuss but you do not need to practice at this time:</div><div class="line"></div><div class="line">vagrant halt</div><div class="line">This command halts your virtual machine. All of your work is saved and the machine is turned off - think of this as “turning the power off”. It’s much slower to stop and start your virtual machine using this command, but it does free up all of your RAM once the machine has been stopped. You should use this command if you plan to take an extended break from your work, like when you are done for the day. The command vagrant up will turn your machine back on and you can continue your work.</div><div class="line">vagrant destroy</div><div class="line">This command destroys your virtual machine. Your work is not saved, the machine is turned off and forgotten about for the most part. Think of this as formatting the hard drive of a computer. You can always use vagrant up to relaunch the machine but you’ll be left with the baseline Linux installation from the beginning of this course. You should not have to use this command at any time during this course unless, at some point in time, you perform a task on the virtual machine that makes it completely inoperable.</div></pre></td></tr></table></figure></p>
+<p> <strong>参考链接：</strong><br> <a href="https://atlas.hashicorp.com/ubuntu/boxes/trusty64" target="_blank" rel="external">first up帮助文档</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;vagrant&quot;&gt;&lt;a href=&quot;#vagrant&quot; class=&quot;headerlink&quot; title=&quot; #vagrant&quot;&gt;&lt;/a&gt; #&lt;a href=&quot;https://www.vagrantup.com/&quot; target=&quot;_blank&quot; rel=&quot;ext
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>linux</title>
@@ -243,11 +292,11 @@
   </entry>
   
   <entry>
-    <title>ELK 搭建_basic</title>
+    <title>ELK 搭建文档</title>
     <link href="https://yuqiangit.github.io/2017/02/04/elk/ELK-%E6%90%AD%E5%BB%BA%E6%96%87%E6%A1%A3/"/>
     <id>https://yuqiangit.github.io/2017/02/04/elk/ELK-搭建文档/</id>
     <published>2017-02-04T10:20:44.000Z</published>
-    <updated>2017-03-21T08:08:33.000Z</updated>
+    <updated>2017-03-21T08:13:08.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="ELK-搭建"><a href="#ELK-搭建" class="headerlink" title="#ELK 搭建"></a>#ELK 搭建</h2><p>[TOC]</p>
 <p>##⚠️</p>

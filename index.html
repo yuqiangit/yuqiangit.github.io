@@ -61,6 +61,89 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-liunx/vim" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/21/liunx/vim/" class="article-date">
+  <time datetime="2017-03-21T10:20:44.000Z" itemprop="datePublished">2017-03-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/21/liunx/vim/">mac vim 设置</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#mac vim 设置</p>
+<p><code>vi ~/.vimrc</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">set ai                  &quot; auto indenting</div><div class="line">set history=100         &quot; keep 100 lines of history</div><div class="line">set ruler               &quot; show the cursor position</div><div class="line">syntax on               &quot; syntax highlighting</div><div class="line">set hlsearch            &quot; highlight the last searched term</div><div class="line">filetype plugin on      &quot; use the file type plugins</div><div class="line"></div><div class="line">&quot; When editing a file, always jump to the last cursor position</div><div class="line">autocmd BufReadPost *</div><div class="line">\ if ! exists(&quot;g:leave_my_cursor_position_alone&quot;) |</div><div class="line">\ if line(&quot;&apos;\&quot;&quot;) &gt; 0 &amp;&amp; line (&quot;&apos;\&quot;&quot;) &lt;= line(&quot;$&quot;) |</div><div class="line">\ exe &quot;normal g&apos;\&quot;&quot; |</div><div class="line">\ endif |</div><div class="line">\ endif</div></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://yuqiangit.github.io/2017/03/21/liunx/vim/" data-id="cj0j9o2xa0000qmsppnggat3t" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-liunx/vagrant" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/21/liunx/vagrant/" class="article-date">
+  <time datetime="2017-03-21T10:20:44.000Z" itemprop="datePublished">2017-03-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/21/liunx/vagrant/">vagrant 虚拟机工具</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="vagrant"><a href="#vagrant" class="headerlink" title=" #vagrant"></a> #<a href="https://www.vagrantup.com/" target="_blank" rel="external">vagrant</a></h2><p> [TOC]</p>
+<p> ##install</p>
+<p> 创建文件夹</p>
+<p> <code>vagrant init ubuntu/trusty64</code></p>
+<p> <code>vagrant up --provider virtualbox</code></p>
+<p> ##cmd<br> |cmd|描述|<br> |:|<br> |<code>vagrant status</code>|状态<br> |<code>vagrant halt</code>|强制关闭，立刻释放所有的ram<br> |<code>vagrant suspend</code>|挂起|<br> |<code>vagrant up</code>|启动|<br> |<code>vagrant destroy</code>|摧毁机器|<br> |<code>vagrant reload</code>|重启机器|</p>
+<p> ##访问控制<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"># Create a forwarded port mapping which allows access to a specific port</div><div class="line"># within the machine from a port on the host machine. In the example below,</div><div class="line"># accessing &quot;localhost:8080&quot; will access port 80 on the guest machine.</div><div class="line"># config.vm.network &quot;forwarded_port&quot;, guest: 80, host: 8080</div><div class="line">Add the following directly below those comments: config.vm.network :forwarded_port, guest: 80, host: 8080</div><div class="line"></div><div class="line">Save the file and start your Vagrant virtual machine using the vagrant up command. If your virtual machine is currently running, you can reload it using the vagrant reload command.</div><div class="line"></div><div class="line"></div><div class="line">This configuration change will setup port forwarding from port 8080 on the host machine (your computer) to the guest machine (your Vagrant virtual machine) when your virtual machine is running. This will allow you to access your web server using the URL http://localhost:8080.</div></pre></td></tr></table></figure></p>
+<p> ##smoe lesson<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">Vagrant Commands</div><div class="line">We’re now ready to get started working within our Linux virtual machine. If your download hasn’t completed from the initial setup, go ahead and take a break and come back when that has completed. You won’t be able to make further progress until the virtual machine is up and running as much of the course will take place within this environment.</div><div class="line"></div><div class="line">Before we access our machine, let’s quickly review a few commands that vagrant provides to make managing your virtual machines much simpler. Remember, your vagrant machine lives within this specific folder on your computer so make sure you’re within that same folder your created earlier; otherwise these commands won’t work as expected.</div><div class="line"></div><div class="line">Type vagrant status</div><div class="line">This command will show you the current status of the virtual machine. It should currently read “default running (virtualbox)” along with some other information.</div><div class="line">Type vagrant suspend</div><div class="line">This command suspends your virtual machine. All of your work is saved and the machine is put into a “sleep mode” of sorts. The machines state is saved and it’s very quick to stop and start your work. You should use this command if you plan to just take a short break from your work but don’t want to leave the virtual machine running.</div><div class="line">Type vagrant up</div><div class="line">This gets your virtual machine up and running again. Notice we didn’t have to redownload the virtual machine image, since it’s already been downloaded.</div><div class="line">Type vagrant ssh</div><div class="line">This command will actually connect to and log you into your virtual machine. Once done you will see a few lines of text showing various performance statistics of the virtual machine along with a new command line prompt that reads vagrant@vagrant-ubuntu-trusty-64:~$</div><div class="line">Here are a few other important commands that we’ll discuss but you do not need to practice at this time:</div><div class="line"></div><div class="line">vagrant halt</div><div class="line">This command halts your virtual machine. All of your work is saved and the machine is turned off - think of this as “turning the power off”. It’s much slower to stop and start your virtual machine using this command, but it does free up all of your RAM once the machine has been stopped. You should use this command if you plan to take an extended break from your work, like when you are done for the day. The command vagrant up will turn your machine back on and you can continue your work.</div><div class="line">vagrant destroy</div><div class="line">This command destroys your virtual machine. Your work is not saved, the machine is turned off and forgotten about for the most part. Think of this as formatting the hard drive of a computer. You can always use vagrant up to relaunch the machine but you’ll be left with the baseline Linux installation from the beginning of this course. You should not have to use this command at any time during this course unless, at some point in time, you perform a task on the virtual machine that makes it completely inoperable.</div></pre></td></tr></table></figure></p>
+<p> <strong>参考链接：</strong><br> <a href="https://atlas.hashicorp.com/ubuntu/boxes/trusty64" target="_blank" rel="external">first up帮助文档</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://yuqiangit.github.io/2017/03/21/liunx/vagrant/" data-id="cj0j9o2xe0001qmspdlmsofr9" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-liunx/linux" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/02/04/liunx/linux/" class="article-date">
@@ -361,7 +444,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/04/elk/ELK-搭建文档/">ELK 搭建_basic</a>
+      <a class="article-title" href="/2017/02/04/elk/ELK-搭建文档/">ELK 搭建文档</a>
     </h1>
   
 
@@ -498,7 +581,7 @@ system call filters failed to install; check the logs and fix your configuration
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li></ul>
     </div>
   </div>
 
@@ -511,6 +594,14 @@ system call filters failed to install; check the logs and fix your configuration
       <ul>
         
           <li>
+            <a href="/2017/03/21/liunx/vim/">mac vim 设置</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/21/liunx/vagrant/">vagrant 虚拟机工具</a>
+          </li>
+        
+          <li>
             <a href="/2017/02/04/liunx/linux/">linux</a>
           </li>
         
@@ -520,14 +611,6 @@ system call filters failed to install; check the logs and fix your configuration
         
           <li>
             <a href="/2017/02/04/nginx/auth_basic/">auth_basic</a>
-          </li>
-        
-          <li>
-            <a href="/2017/02/04/nginx/nginx500错误/">异常处理（持续更新...）</a>
-          </li>
-        
-          <li>
-            <a href="/2017/02/04/elk/ELK-搭建文档/">ELK 搭建_basic</a>
           </li>
         
       </ul>
