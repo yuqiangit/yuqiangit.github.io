@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="vim," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -92,22 +92,15 @@
 
 
 
-<meta name="description" content="#mac vim 设置
-vi ~/.vimrc
-1234567891011121314set ai                  &amp;quot; auto indentingset history=100         &amp;quot; keep 100 lines of historyset ruler               &amp;quot; show the cursor positions">
-<meta property="og:type" content="article">
-<meta property="og:title" content="mac vim 设置">
-<meta property="og:url" content="https://yuqiangit.github.io/2017/03/21/liunx/vim/index.html">
+<meta name="description" content="技术博客">
+<meta property="og:type" content="website">
+<meta property="og:title" content="五年">
+<meta property="og:url" content="https://yuqiangit.github.io/tags/session/index.html">
 <meta property="og:site_name" content="五年">
-<meta property="og:description" content="#mac vim 设置
-vi ~/.vimrc
-1234567891011121314set ai                  &amp;quot; auto indentingset history=100         &amp;quot; keep 100 lines of historyset ruler               &amp;quot; show the cursor positions">
-<meta property="og:updated_time" content="2017-05-12T09:52:13.000Z">
+<meta property="og:description" content="技术博客">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="mac vim 设置">
-<meta name="twitter:description" content="#mac vim 设置
-vi ~/.vimrc
-1234567891011121314set ai                  &amp;quot; auto indentingset history=100         &amp;quot; keep 100 lines of historyset ruler               &amp;quot; show the cursor positions">
+<meta name="twitter:title" content="五年">
+<meta name="twitter:description" content="技术博客">
 
 
 
@@ -135,13 +128,13 @@ vi ~/.vimrc
 
 
 
-  <link rel="canonical" href="https://yuqiangit.github.io/2017/03/21/liunx/vim/"/>
+  <link rel="canonical" href="https://yuqiangit.github.io/tags/session/"/>
 
 
 
 
 
-  <title>mac vim 设置 | 五年</title>
+  <title>标签: session | 五年</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -166,7 +159,7 @@ vi ~/.vimrc
     
   
 
-  <div class="container sidebar-position-left page-post-detail ">
+  <div class="container sidebar-position-left  ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -250,153 +243,44 @@ vi ~/.vimrc
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://yuqiangit.github.io/2017/03/21/liunx/vim/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="walter">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="五年">
-    </span>
+  <div id="posts" class="posts-collapse">
+    <div class="collection-title">
+      <h1>session<small>标签</small>
+      </h1>
+    </div>
 
     
-      <header class="post-header">
+      
 
-        
-        
-          <h1 class="post-title" itemprop="name headline">mac vim 设置</h1>
-        
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2017/05/12/session/cookie禁用掉之后/" itemprop="url">
               
-                <span class="post-meta-item-text">发表于</span>
+                <span itemprop="name">session解析</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-21T18:20:44+08:00">
-                2017-03-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <p>#mac vim 设置</p>
-<p><code>vi ~/.vimrc</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">set ai                  &quot; auto indenting</div><div class="line">set history=100         &quot; keep 100 lines of history</div><div class="line">set ruler               &quot; show the cursor position</div><div class="line">syntax on               &quot; syntax highlighting</div><div class="line">set hlsearch            &quot; highlight the last searched term</div><div class="line">filetype plugin on      &quot; use the file type plugins</div><div class="line"></div><div class="line">&quot; When editing a file, always jump to the last cursor position</div><div class="line">autocmd BufReadPost *</div><div class="line">\ if ! exists(&quot;g:leave_my_cursor_position_alone&quot;) |</div><div class="line">\ if line(&quot;&apos;\&quot;&quot;) &gt; 0 &amp;&amp; line (&quot;&apos;\&quot;&quot;) &lt;= line(&quot;$&quot;) |</div><div class="line">\ exe &quot;normal g&apos;\&quot;&quot; |</div><div class="line">\ endif |</div><div class="line">\ endif</div></pre></td></tr></table></figure>
-      
-    </div>
-
-    <div>
-      
+            </a>
         
+      </h2>
 
-      
-    </div>
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2017-05-12T17:20:44+08:00"
+              content="2017-05-12" >
+          05-12
+        </time>
+      </div>
 
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/vim/" rel="tag"># vim</a>
-          
-        </div>
-      
-
-      
-        
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2017/03/21/liunx/vagrant/" rel="next" title="vagrant 虚拟机工具">
-                <i class="fa fa-chevron-left"></i> vagrant 虚拟机工具
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/05/05/redis/redis集群/" rel="prev" title="redis集群">
-                redis集群 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
+    </header>
   </article>
 
 
-
-    <div class="post-spread">
-      
-    </div>
+    
   </div>
+
+  
 
 
           </div>
@@ -404,10 +288,6 @@ vi ~/.vimrc
 
 
           
-  <div class="comments" id="comments">
-    
-  </div>
-
 
         </div>
         
@@ -601,10 +481,6 @@ vi ~/.vimrc
   
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
-
-
 
   
 

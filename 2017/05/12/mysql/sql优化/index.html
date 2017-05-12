@@ -1,0 +1,694 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="mysql," />
+
+
+
+
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="五年" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="#mysql 优化策略
+目前看到喜欢的mysql优化策略来自美团点评技术团队
+防身的mysql优化策略：
+
+索引
+
+最左前缀匹配原则，非常重要的原则，mysql会一直向右匹配直到遇到范围查询(&amp;gt;、&amp;lt;、between、like)就停止匹配，比如a = 1 and b = 2 and c &amp;gt; 3 and d = 4 如果建立(a,b,c,d)顺序的索引，d是用不到索引的，如果建立(a">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mysql优化">
+<meta property="og:url" content="https://yuqiangit.github.io/2017/05/12/mysql/sql优化/index.html">
+<meta property="og:site_name" content="五年">
+<meta property="og:description" content="#mysql 优化策略
+目前看到喜欢的mysql优化策略来自美团点评技术团队
+防身的mysql优化策略：
+
+索引
+
+最左前缀匹配原则，非常重要的原则，mysql会一直向右匹配直到遇到范围查询(&amp;gt;、&amp;lt;、between、like)就停止匹配，比如a = 1 and b = 2 and c &amp;gt; 3 and d = 4 如果建立(a,b,c,d)顺序的索引，d是用不到索引的，如果建立(a">
+<meta property="og:updated_time" content="2017-05-12T09:52:47.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mysql优化">
+<meta name="twitter:description" content="#mysql 优化策略
+目前看到喜欢的mysql优化策略来自美团点评技术团队
+防身的mysql优化策略：
+
+索引
+
+最左前缀匹配原则，非常重要的原则，mysql会一直向右匹配直到遇到范围查询(&amp;gt;、&amp;lt;、between、like)就停止匹配，比如a = 1 and b = 2 and c &amp;gt; 3 and d = 4 如果建立(a,b,c,d)顺序的索引，d是用不到索引的，如果建立(a">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://yuqiangit.github.io/2017/05/12/mysql/sql优化/"/>
+
+
+
+
+
+  <title>mysql优化 | 五年</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">五年</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一身转战三千里 一剑曾当百万师</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://yuqiangit.github.io/2017/05/12/mysql/sql优化/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="walter">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="五年">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">mysql优化</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-12T18:40:44+08:00">
+                2017-05-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>#mysql 优化策略</p>
+<p>目前看到喜欢的mysql优化策略来自<a href="http://tech.meituan.com/mysql-index.html" target="_blank" rel="external">美团点评技术团队</a></p>
+<p>防身的mysql优化策略：</p>
+<ol>
+<li><p>索引</p>
+<ol>
+<li><p>最<code>左前缀匹配</code>原则，非常重要的原则，mysql会一直向右匹配直到遇到范围查询(&gt;、&lt;、between、like)就停止匹配，比如a = 1 and b = 2 and c &gt; 3 and d = 4 如果建立(a,b,c,d)顺序的索引，d是用不到索引的，如果建立(a,b,d,c)的索引则都可以用到，a,b,d的顺序可以任意调整。</p>
+</li>
+<li><p>=和in可以乱序，比如a = 1 and b = 2 and c = 3 建立(a,b,c)索引可以任意顺序，mysql的查询优化器会帮你优化成索引可以识别的形式</p>
+</li>
+<li><p>尽量选择区分度高的列作为索引,区分度的公式是count(distinct col)/count(*)，表示字段不重复的比例，比例越大我们扫描的记录数越少，唯一键的区分度是1，而一些状态、性别字段可能在大数据面前区分度就是0，那可能有人会问，这个比例有什么经验值吗？使用场景不同，这个值也很难确定，一般需要join的字段我们都要求是0.1以上，即平均1条扫描10条记录</p>
+</li>
+<li>索引列不能参与计算，保持列“干净”，比如from_unixtime(create_time) = ’2014-05-29’就不能使用到索引，原因很简单，b+树中存的都是数据表中的字段值，但进行检索时，需要把所有元素都应用函数才能比较，显然成本太大。所以语句应该写成create_time = unix_timestamp(’2014-05-29’);</li>
+<li>尽量的扩展索引，不要新建索引。比如表中已经有a的索引，现在要加(a,b)的索引，那么只需要修改原来的索引即可</li>
+</ol>
+</li>
+<li><p>更省力的索引检查<br>还是<a href="https://github.com/Meituan-Dianping/SQLAdvisor" target="_blank" rel="external">美团点评技术团队</a>的case：</p>
+</li>
+</ol>
+<p>用例如下，适合对mysql优化无力深入的。。。。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div></pre></td><td class="code"><pre><div class="line">./sqladvisor -h dev-be-mysql.co904fphklgb.ap-southeast-1.rds.amazonaws.com -P 3306 -u langapi -p &apos;!ang!iv*b*&apos; -d db_billing -q &quot;SELECT ca.tid, ca.pfid, ca.cash, ca.gold, ca.order_time, ca.status, ca.op_id, ca.op_time, ca.to_account, ch.name, ch.phone, ch.birthday, ch.address, ch.id_card_address, ch.id_card_img_0, ch.id_card_img_1, ch.bank_card_img, ch.bank_code, ch.bank_name, ch.email, ch.bank_branch_name, cr.company_id, cp.company AS company, ch.cashier_type, ch.op_id AS cashier_op_id FROM tb_cashier AS ca LEFT JOIN tb_cashier_hot AS ch ON ca.tid = ch.tid LEFT JOIN tb_company_relationship AS cr ON cr.pfid = ca.pfid LEFT JOIN tb_company AS cp ON cp.id = cr.company_id LIMIT 100&quot; -v 1</div><div class="line"></div><div class="line"></div><div class="line">2017-05-12 17:48:12 31770 [Note] 第1步: 对SQL解析优化之后得到的SQL:select `ca`.`tid` AS `tid`,`ca`.`pfid` AS `pfid`,`ca`.`cash` AS `cash`,`ca`.`gold` AS `gold`,`ca`.`order_time` AS `order_time`,`ca`.`status` AS `status`,`ca`.`op_id` AS `op_id`,`ca`.`op_time` AS `op_time`,`ca`.`to_account` AS `to_account`,`ch`.`name` AS `name`,`ch`.`phone` AS `phone`,`ch`.`birthday` AS `birthday`,`ch`.`address` AS `address`,`ch`.`id_card_address` AS `id_card_address`,`ch`.`id_card_img_0` AS `id_card_img_0`,`ch`.`id_card_img_1` AS `id_card_img_1`,`ch`.`bank_card_img` AS `bank_card_img`,`ch`.`bank_code` AS `bank_code`,`ch`.`bank_name` AS `bank_name`,`ch`.`email` AS `email`,`ch`.`bank_branch_name` AS `bank_branch_name`,`cr`.`company_id` AS `company_id`,`cp`.`company` AS `company`,`ch`.`cashier_type` AS `cashier_type`,`ch`.`op_id` AS `cashier_op_id` from (((`db_billing`.`tb_cashier` `ca` left join `db_billing`.`tb_cashier_hot` `ch` on((`ca`.`tid` = `ch`.`tid`))) left join `db_billing`.`tb_company_relationship` `cr` on((`cr`.`pfid` = `ca`.`pfid`))) le</div><div class="line">2017-05-12 17:48:12 31770 [Note] 第2步：开始解析join on条件:ca.tid=ch.tid </div><div class="line"></div><div class="line">2017-05-12 17:48:12 31770 [Note] 第3步：开始解析join on条件:cr.pfid=ca.pfid </div><div class="line"></div><div class="line">2017-05-12 17:48:12 31770 [Note] 第4步：开始解析join on条件:cp.id=cr.company_id </div><div class="line"></div><div class="line">2017-05-12 17:48:12 31770 [Note] 第5步：开始选择驱动表,一共有1个候选驱动表 </div><div class="line"></div><div class="line">2017-05-12 17:48:12 31770 [Note] explain select * from tb_cashier </div><div class="line"></div><div class="line">2017-05-12 17:48:12 31770 [Note] 第6步：候选驱动表tb_cashier的结果集行数为:182 </div><div class="line"></div><div class="line">2017-05-12 17:48:12 31770 [Note] 第7步：选择表tb_cashier为驱动表 </div><div class="line"></div><div class="line">2017-05-12 17:48:12 31770 [Note] 第8步：表tb_cashier 的SQL太逆天,没有优化建议 </div><div class="line"></div><div class="line">2017-05-12 17:48:12 31770 [Note] 第9步：开始验证 字段tid是不是主键。表名:tb_cashier_hot </div><div class="line"></div><div class="line">2017-05-12 17:48:12 31770 [Note] show index from tb_cashier_hot where Key_name = &apos;PRIMARY&apos; and Column_name =&apos;tid&apos; and Seq_in_index = 1 </div><div class="line"></div><div class="line">2017-05-12 17:48:12 31770 [Note] 第10步：字段tid不是主键。表名:tb_cashier_hot </div><div class="line"></div><div class="line">2017-05-12 17:48:12 31770 [Note] 第11步：开始验证 字段tid是不是主键。表名:tb_cashier_hot </div><div class="line"></div><div class="line">2017-05-12 17:48:12 31770 [Note] show index from tb_cashier_hot where Key_name = &apos;PRIMARY&apos; and Column_name =&apos;tid&apos; and Seq_in_index = 1 </div><div class="line"></div><div class="line">2017-05-12 17:48:12 31770 [Note] 第12步：字段tid不是主键。表名:tb_cashier_hot </div><div class="line"></div><div class="line">2017-05-12 17:48:12 31770 [Note] 第13步：开始验证表中是否已存在相关索引。表名:tb_cashier_hot, 字段名:tid, 在索引中的位置:1 </div><div class="line"></div><div class="line">2017-05-12 17:48:12 31770 [Note] show index from tb_cashier_hot where Column_name =&apos;tid&apos; and Seq_in_index =1 </div><div class="line"></div><div class="line">2017-05-12 17:48:12 31770 [Note] 第14步：开始输出表tb_cashier_hot索引优化建议: </div><div class="line"></div><div class="line">2017-05-12 17:48:12 31770 [Note] Create_Index_SQL：alter table tb_cashier_hot add index idx_tid(tid) </div><div class="line"></div><div class="line">2017-05-12 17:48:12 31770 [Note] 第15步：开始验证 字段pfid是不是主键。表名:tb_company_relationship </div><div class="line"></div><div class="line">2017-05-12 17:48:12 31770 [Note] show index from tb_company_relationship where Key_name = &apos;PRIMARY&apos; and Column_name =&apos;pfid&apos; and Seq_in_index = 1 </div><div class="line"></div><div class="line">2017-05-12 17:48:12 31770 [Note] 第16步：字段pfid不是主键。表名:tb_company_relationship </div><div class="line"></div><div class="line">2017-05-12 17:48:12 31770 [Note] 第17步：开始验证 字段pfid是不是主键。表名:tb_company_relationship </div><div class="line"></div><div class="line">2017-05-12 17:48:12 31770 [Note] show index from tb_company_relationship where Key_name = &apos;PRIMARY&apos; and Column_name =&apos;pfid&apos; and Seq_in_index = 1 </div><div class="line"></div><div class="line">2017-05-12 17:48:12 31770 [Note] 第18步：字段pfid不是主键。表名:tb_company_relationship </div><div class="line"></div><div class="line">2017-05-12 17:48:12 31770 [Note] 第19步：开始验证表中是否已存在相关索引。表名:tb_company_relationship, 字段名:pfid, 在索引中的位置:1 </div><div class="line"></div><div class="line">2017-05-12 17:48:12 31770 [Note] show index from tb_company_relationship where Column_name =&apos;pfid&apos; and Seq_in_index =1 </div><div class="line"></div><div class="line">2017-05-12 17:48:12 31770 [Note] 第20步：索引(pfid)已存在 </div><div class="line"></div><div class="line">2017-05-12 17:48:12 31770 [Note] 第21步：开始验证 字段id是不是主键。表名:tb_company </div><div class="line"></div><div class="line">2017-05-12 17:48:12 31770 [Note] show index from tb_company where Key_name = &apos;PRIMARY&apos; and Column_name =&apos;id&apos; and Seq_in_index = 1 </div><div class="line"></div><div class="line">2017-05-12 17:48:12 31770 [Note] 第22步：字段id是主键。表名:tb_company </div><div class="line"></div><div class="line">2017-05-12 17:48:12 31770 [Note] 第23步：表tb_company 经过运算得到的索引列首列是主键,直接放弃,没有优化建议 </div><div class="line"></div><div class="line">2017-05-12 17:48:12 31770 [Note] 第24步: SQLAdvisor结束!</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/mysql/" rel="tag"># mysql</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/12/session/cookie禁用掉之后/" rel="next" title="session解析">
+                <i class="fa fa-chevron-left"></i> session解析
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="walter" />
+          <p class="site-author-name" itemprop="name">walter</p>
+           
+              <p class="site-description motion-element" itemprop="description">技术博客</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">walter</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
