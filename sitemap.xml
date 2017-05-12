@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://yuqiangit.github.io/2017/05/12/session/cookie%E7%A6%81%E7%94%A8%E6%8E%89%E4%B9%8B%E5%90%8E/</loc>
+    
+    <lastmod>2017-05-12T09:11:41.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://yuqiangit.github.io/2017/05/05/redis/redis%E9%9B%86%E7%BE%A4/</loc>
     
     <lastmod>2017-05-12T09:08:25.000Z</lastmod>
@@ -12,13 +19,6 @@
     <loc>https://yuqiangit.github.io/2017/02/04/nginx/auth_basic/</loc>
     
     <lastmod>2017-05-12T09:06:19.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://yuqiangit.github.io/2017/02/04/session/cookie%E7%A6%81%E7%94%A8%E6%8E%89%E4%B9%8B%E5%90%8E/</loc>
-    
-    <lastmod>2017-05-12T08:55:26.000Z</lastmod>
     
   </url>
   

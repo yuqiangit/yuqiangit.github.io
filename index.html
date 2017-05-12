@@ -252,6 +252,142 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://yuqiangit.github.io/2017/05/12/session/cookie禁用掉之后/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="walter">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="五年">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/05/12/session/cookie禁用掉之后/" itemprop="url">session解析</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-12T17:20:44+08:00">
+                2017-05-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>#session解析</p>
+<p>##http<br>Http是一种无状态性的协议。这是因为此种协议不要求浏览器在每次请求中标明它自己的身份，并且浏览器以及服务器之间并没有保持一个持久性的连接用于多个页面之间的访问。当一个用户访问一个站点的时候，用户的浏览器发送一个http请求到服务器，服务器返回给浏览器一个http响应。其实很简单的一个概念，客户端一个请求，服务器端一个回复，这就是整个基于http协议的通讯过程。</p>
+<p>##cookie<br>Cookie（复数形态Cookies），中文名称为“小型文本文件”或“小甜饼”[1]，指某些网站为了辨别用户身份而储存在用户本地终端（Client Side）上的数据（通常经过加密）。定义于RFC2109。是网景公司的前雇员卢·蒙特利在1993年3月的发明[2]。</p>
+<p>浏览器中cookie<br><img src="./1494557865685.png" alt="Alt text"></p>
+<p>##禁用cookie之后</p>
+<p>当禁用cookie之后，浏览器进行网页的访问，cookie就不存在了，自然不能将session_id传入到服务端，服务端也就无法识别用户的身份。</p>
+<p>这里面的核心问题其实跟cookie没关系，仅仅是session_id（用户身份标识）无法传输到服务端了。</p>
+<p>那我们把session_id作为一个参数来看待，解决的问题的方案就出来了，手动的传输我们session_id到服务端就好了。</p>
+<p>这就是url重写。不管是get 还是post 请求，根据业务相应的传输方案就好。</p>
+<p>当前端里面的session_id，通过请求发送到服务器之后，php服务端处理方案是：</p>
+<ol>
+<li>获取客户端传入的session_id,</li>
+<li>设置session_id </li>
+<li>即可正常的读取session内容</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line"></div><div class="line">session_start();</div><div class="line">session_id(<span class="string">'020e163uku6ptt7cm6eoj50992'</span>);</div><div class="line">var_dump(<span class="variable">$_SESSION</span>);</div><div class="line"><span class="keyword">if</span> (empty(<span class="variable">$_SESSION</span>[<span class="string">'count'</span>])) &#123;</div><div class="line">    <span class="variable">$_SESSION</span>[<span class="string">'count'</span>] = 1;</div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="variable">$_SESSION</span>[<span class="string">'count'</span>]++;</div><div class="line">&#125;</div><div class="line">?&gt;</div><div class="line"></div><div class="line">&lt;p&gt;</div><div class="line">    Hello visitor, you have seen this page &lt;?php <span class="built_in">echo</span> <span class="variable">$_SESSION</span>[<span class="string">'count'</span>].htmlspecialchars(SID); ?&gt; times.</div><div class="line">&lt;/p&gt;</div><div class="line"></div><div class="line">&lt;p&gt;</div><div class="line">    To <span class="built_in">continue</span>, &lt;a href=<span class="string">"&lt;?php echo "</span>nextpage.php?<span class="string">". htmlspecialchars(SID); ?&gt;"</span>&gt;click here&lt;/a&gt;.</div><div class="line">&lt;/p&gt;</div></pre></td></tr></table></figure>
+<p><em>上述代码</em></p>
+<blockquote>
+<p>SID的session_id，在cookie被禁用的模式下，会自动被赋值<br>session_id($sid)，通过手动设置session_id 既可以实现session的状态</p>
+</blockquote>
+<p>##php 中的 session</p>
+<p>php中session的位置可以进行配置：<br>session.save_path = “/tmp/session”</p>
+<p>我使用的服务器，默认在/tmp里面<br>session在服务器上的实际存在情况<br>|字段|值|<br>|-:-|<br>|path |<code>/tmp/sess_ucqqv1ej1lulttmste47hpuj56</code>|<br>|info|<code>$key\|type:len:&quot;$value&quot;\</code></p>
+<p>参考文档：</p>
+<p><a href="http://www.jianshu.com/p/2b7c10291aad" target="_blank" rel="external">SESSION 原理</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://yuqiangit.github.io/2017/05/05/redis/redis集群/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1350,142 +1486,6 @@ system call filters failed to install; check the logs and fix your configuration
 </tbody>
 </table>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div></pre></td><td class="code"><pre><div class="line">系统</div><div class="line"></div><div class="line">　　# uname -a # 查看内核/操作系统/CPU信息</div><div class="line">　　# head -n 1 /etc/issue # 查看操作系统版本</div><div class="line">　　# cat /proc/cpuinfo # 查看CPU信息</div><div class="line">　　# hostname # 查看计算机名</div><div class="line">　　# lspci -tv # 列出所有PCI设备</div><div class="line">　　# lsusb -tv # 列出所有USB设备</div><div class="line">　　# lsmod # 列出加载的内核模块</div><div class="line">　　# env # 查看环境变量</div><div class="line"></div><div class="line">资源</div><div class="line"></div><div class="line">　　# free -m # 查看内存使用量和交换区使用量</div><div class="line">　　# df -h # 查看各分区使用情况</div><div class="line">　　# du -sh &lt;目录名&gt; # 查看指定目录的大小</div><div class="line">　　# grep MemTotal /proc/meminfo # 查看内存总量</div><div class="line">　　# grep MemFree /proc/meminfo # 查看空闲内存量</div><div class="line">　　# uptime # 查看系统运行时间、用户数、负载</div><div class="line">　　# cat /proc/loadavg # 查看系统负载</div><div class="line"></div><div class="line">磁盘和分区</div><div class="line"></div><div class="line">　　# mount | column -t # 查看挂接的分区状态</div><div class="line">　　# fdisk -l # 查看所有分区</div><div class="line">　　# swapon -s # 查看所有交换分区</div><div class="line">　　# hdparm -i /dev/hda # 查看磁盘参数（仅适用于IDE设备）</div><div class="line">　　# dmesg | grep IDE # 查看启动时IDE设备检测状况</div><div class="line"></div><div class="line">网络</div><div class="line"></div><div class="line">　　# ifconfig # 查看所有网络接口的属性</div><div class="line">　　# iptables -L # 查看防火墙设置</div><div class="line">　　# route -n # 查看路由表</div><div class="line">　　# netstat -lntp # 查看所有监听端口</div><div class="line">　　# netstat -antp # 查看所有已经建立的连接</div><div class="line">　　# netstat -s # 查看网络统计信息</div><div class="line"></div><div class="line">进程</div><div class="line"></div><div class="line">　　# ps -ef # 查看所有进程</div><div class="line">　　# top # 实时显示进程状态</div><div class="line"></div><div class="line">用户</div><div class="line"></div><div class="line">　　# w # 查看活动用户</div><div class="line">　　# id &lt;用户名&gt; # 查看指定用户信息</div><div class="line">　　# last # 查看用户登录日志</div><div class="line">　　# cut -d: -f1 /etc/passwd # 查看系统所有用户</div><div class="line">　　# cut -d: -f1 /etc/group # 查看系统所有组</div><div class="line">　　# crontab -l # 查看当前用户的计划任务</div><div class="line"></div><div class="line">服务</div><div class="line"></div><div class="line">　　# chkconfig --list # 列出所有系统服务</div><div class="line">　　# chkconfig --list | grep on # 列出所有启动的系统服务</div><div class="line"></div><div class="line">程序</div><div class="line"></div><div class="line">　　# rpm -qa # 查看所有安装的软件包</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://yuqiangit.github.io/2017/02/04/session/cookie禁用掉之后/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="walter">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="五年">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/02/04/session/cookie禁用掉之后/" itemprop="url">session解析</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-04T18:20:44+08:00">
-                2017-02-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>#session解析</p>
-<p>##http<br>Http是一种无状态性的协议。这是因为此种协议不要求浏览器在每次请求中标明它自己的身份，并且浏览器以及服务器之间并没有保持一个持久性的连接用于多个页面之间的访问。当一个用户访问一个站点的时候，用户的浏览器发送一个http请求到服务器，服务器返回给浏览器一个http响应。其实很简单的一个概念，客户端一个请求，服务器端一个回复，这就是整个基于http协议的通讯过程。</p>
-<p>##cookie<br>Cookie（复数形态Cookies），中文名称为“小型文本文件”或“小甜饼”[1]，指某些网站为了辨别用户身份而储存在用户本地终端（Client Side）上的数据（通常经过加密）。定义于RFC2109。是网景公司的前雇员卢·蒙特利在1993年3月的发明[2]。</p>
-<p>浏览器中cookie<br><img src="./1494557865685.png" alt="Alt text"></p>
-<p>##禁用cookie之后</p>
-<p>当禁用cookie之后，浏览器进行网页的访问，cookie就不存在了，自然不能将session_id传入到服务端，服务端也就无法识别用户的身份。</p>
-<p>这里面的核心问题其实跟cookie没关系，仅仅是session_id（用户身份标识）无法传输到服务端了。</p>
-<p>那我们把session_id作为一个参数来看待，解决的问题的方案就出来了，手动的传输我们session_id到服务端就好了。</p>
-<p>这就是url重写。不管是get 还是post 请求，根据业务相应的传输方案就好。</p>
-<p>当前端里面的session_id，通过请求发送到服务器之后，php服务端处理方案是：</p>
-<ol>
-<li>获取客户端传入的session_id,</li>
-<li>设置session_id </li>
-<li>即可正常的读取session内容</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line"></div><div class="line">session_start();</div><div class="line">session_id(<span class="string">'020e163uku6ptt7cm6eoj50992'</span>);</div><div class="line">var_dump(<span class="variable">$_SESSION</span>);</div><div class="line"><span class="keyword">if</span> (empty(<span class="variable">$_SESSION</span>[<span class="string">'count'</span>])) &#123;</div><div class="line">    <span class="variable">$_SESSION</span>[<span class="string">'count'</span>] = 1;</div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="variable">$_SESSION</span>[<span class="string">'count'</span>]++;</div><div class="line">&#125;</div><div class="line">?&gt;</div><div class="line"></div><div class="line">&lt;p&gt;</div><div class="line">    Hello visitor, you have seen this page &lt;?php <span class="built_in">echo</span> <span class="variable">$_SESSION</span>[<span class="string">'count'</span>].htmlspecialchars(SID); ?&gt; times.</div><div class="line">&lt;/p&gt;</div><div class="line"></div><div class="line">&lt;p&gt;</div><div class="line">    To <span class="built_in">continue</span>, &lt;a href=<span class="string">"&lt;?php echo "</span>nextpage.php?<span class="string">". htmlspecialchars(SID); ?&gt;"</span>&gt;click here&lt;/a&gt;.</div><div class="line">&lt;/p&gt;</div></pre></td></tr></table></figure>
-<p><em>上述代码</em></p>
-<blockquote>
-<p>SID的session_id，在cookie被禁用的模式下，会自动被赋值<br>session_id($sid)，通过手动设置session_id 既可以实现session的状态</p>
-</blockquote>
-<p>##php 中的 session</p>
-<p>php中session的位置可以进行配置：<br>session.save_path = “/tmp/session”</p>
-<p>我使用的服务器，默认在/tmp里面<br>session在服务器上的实际存在情况<br>|字段|值|<br>|-:-|<br>|path |<code>/tmp/sess_ucqqv1ej1lulttmste47hpuj56</code>|<br>|info|<code>$key\|type:len:&quot;$value&quot;\</code></p>
-<p>参考文档：</p>
-<p><a href="http://www.jianshu.com/p/2b7c10291aad" target="_blank" rel="external">SESSION 原理</a></p>
 
           
         
